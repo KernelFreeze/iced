@@ -132,14 +132,14 @@ pub enum State {
     None,
 
     /// Some meaningful internal state.
-    Some(Box<dyn Any>),
+    Some(Box<dyn Any + Send + Sync>),
 }
 
 impl State {
     /// Creates a new [`State`].
     pub fn new<T>(state: T) -> Self
     where
-        T: 'static,
+        T: 'static + Send + Sync,
     {
         State::Some(Box::new(state))
     }

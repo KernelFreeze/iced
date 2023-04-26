@@ -145,7 +145,7 @@ where
 impl<'a, T: 'a, Message, Renderer> Widget<Message, Renderer>
     for PickList<'a, T, Message, Renderer>
 where
-    T: Clone + ToString + Eq + 'static,
+    T: Clone + ToString + Eq + Send + Sync + 'static,
     [T]: ToOwned<Owned = Vec<T>>,
     Message: 'a,
     Renderer: text::Renderer + 'a,
@@ -277,7 +277,7 @@ where
 impl<'a, T: 'a, Message, Renderer> From<PickList<'a, T, Message, Renderer>>
     for Element<'a, Message, Renderer>
 where
-    T: Clone + ToString + Eq + 'static,
+    T: Clone + ToString + Eq + Send + Sync + 'static,
     [T]: ToOwned<Owned = Vec<T>>,
     Message: 'a,
     Renderer: text::Renderer + 'a,
